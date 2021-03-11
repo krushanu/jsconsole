@@ -1,25 +1,112 @@
-import logo from './logo.svg';
+import { Component } from 'react';
+import { DrawLine } from './DrawLine';
+import { checkCanvas, constructCanvas } from './Canvas';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			drawingArray: [],
+		};
+	}
+
+	drawElement = (key) => {
+		switch (key) {
+			case '-':
+				return '-';
+			case '|':
+				return '|';
+			case '1':
+				return 'X';
+			case '0':
+				return ' ';
+
+			default:
+				return '@';
+		}
+	};
+
+	handleChange = (e) => {
+		this.setState({ command: e.target.value });
+	};
+
+	processCommand = (command) => {
+		const { drawingArray } = this.state;
+		const spr = command.trim().split(' ');
+		const key = spr[0];
+
+		switch (key) {
+			case 'C':
+				if (checkCanvas(drawingArray)) {
+					alert('Canvas exists');
+				} else {
+					return constructCanvas({ w: spr[1], h: spr[2] });
+				}
+				break;
+			case 'L':
+				if (checkCanvas(drawingArray))
+					return DrawLine({
+						x1: parseInt(spr[1]),
+						y1: parseInt(spr[2]),
+						x2: parseInt(spr[3]),
+						y2: parseInt(spr[4]),
+						arr: drawingArray,
+					});
+				alert("Canvas Does't exists");
+				break;
+			case 'R':
+				break;
+			case 'B':
+				break;
+			case 'Q':
+				return [];
+
+			default:
+				return 'Invalid command.';
+		}
+		return [];
+	};
+
+	click = () => {
+		const { command } = this.state;
+		const resp = this.processCommand(command);
+		if (typeof resp === 'string') {
+			alert(resp);
+		} else {
+			this.setState({
+				drawingArray: resp,
+			});
+		}
+	};
+
+	render() {
+		const { drawingArray } = this.state;
+		return (
+			<div className="App">
+				<input
+					type="text"
+					onChange={this.handleChange}
+					placeholder="Enter command here"
+				/>
+				<input type="button" value="Click Here" onClick={this.click} />
+				{drawingArray.map((eachRow, i) => {
+					return (
+						<p key={i}>
+							{eachRow.map((eachElement, j) => {
+								const element = this.drawElement(eachElement);
+								return (
+									<span key={j} className="cell">
+										{element}
+									</span>
+								);
+							})}
+						</p>
+					);
+				})}
+			</div>
+		);
+	}
 }
 
 export default App;
