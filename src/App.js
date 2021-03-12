@@ -68,7 +68,6 @@ class App extends Component {
 					});
 				alert("Canvas Does't exists");
 				break;
-				break;
 			case 'B':
 				if (checkCanvas(drawingArray))
 					return FillBucket({
