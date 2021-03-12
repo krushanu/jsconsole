@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import { DrawLine } from './DrawLine';
+import { FillBucket } from './FillBucket';
+import { DrawRect } from './DrawRect';
 import { checkCanvas, constructCanvas } from './Canvas';
 import './App.css';
 
@@ -23,7 +25,7 @@ class App extends Component {
 				return ' ';
 
 			default:
-				return '@';
+				return key;
 		}
 	};
 
@@ -56,8 +58,26 @@ class App extends Component {
 				alert("Canvas Does't exists");
 				break;
 			case 'R':
+				if (checkCanvas(drawingArray))
+					return DrawRect({
+						x1: parseInt(spr[1]),
+						y1: parseInt(spr[2]),
+						x2: parseInt(spr[3]),
+						y2: parseInt(spr[4]),
+						arr: drawingArray,
+					});
+				alert("Canvas Does't exists");
+				break;
 				break;
 			case 'B':
+				if (checkCanvas(drawingArray))
+					return FillBucket({
+						x: parseInt(spr[1]),
+						y: parseInt(spr[2]),
+						c: spr[3],
+						arr: drawingArray,
+					});
+				alert("Canvas Does't exists");
 				break;
 			case 'Q':
 				return [];
