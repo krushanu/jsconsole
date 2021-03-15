@@ -31,10 +31,10 @@ const _drawRect = (arg) => {
 
 const _validate = (arg) => {
 	const { x1, y1, x2, y2, arr } = arg;
-	const canvasWidth = arr[0]?.length - 3,
-		canvasHeigth = arr?.length - 3,
-		rectWidth = Math.abs(x2 - x1),
-		rectHeight = Math.abs(y2 - y1);
+	const canvasWidth = arr[0]?.length - 2,
+		canvasHeigth = arr?.length - 2,
+		rectWidth = Math.abs(x2 - x1 + 1),
+		rectHeight = Math.abs(y2 - y1 + 1);
 
 	return (
 		x1 > 0 &&

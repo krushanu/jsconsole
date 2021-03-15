@@ -41,11 +41,10 @@ class App extends Component {
 		switch (key) {
 			case 'C':
 				if (checkCanvas(drawingArray)) {
-					alert('Canvas exists');
+					return 'Canvas exists';
 				} else {
 					return constructCanvas({ w: spr[1], h: spr[2] });
 				}
-				break;
 			case 'L':
 				if (checkCanvas(drawingArray))
 					return DrawLine({
@@ -55,8 +54,7 @@ class App extends Component {
 						y2: parseInt(spr[4]),
 						arr: drawingArray,
 					});
-				alert("Canvas Does't exists");
-				break;
+				return "Canvas Does't exists";
 			case 'R':
 				if (checkCanvas(drawingArray))
 					return DrawRect({
@@ -66,8 +64,7 @@ class App extends Component {
 						y2: parseInt(spr[4]),
 						arr: drawingArray,
 					});
-				alert("Canvas Does't exists");
-				break;
+				return "Canvas Does't exists";
 			case 'B':
 				if (checkCanvas(drawingArray))
 					return FillBucket({
@@ -76,15 +73,14 @@ class App extends Component {
 						c: spr[3],
 						arr: drawingArray,
 					});
-				alert("Canvas Does't exists");
-				break;
+				return "Canvas Does't exists";
 			case 'Q':
-				return [];
+				if (checkCanvas(drawingArray)) return [];
+				return "Canvas Does't exists";
 
 			default:
-				return 'Invalid command.';
+				return 'Invalid Command';
 		}
-		return [];
 	};
 
 	click = () => {

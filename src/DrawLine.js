@@ -29,10 +29,10 @@ const _render = (arg) => {
 
 const _validate = (arg) => {
 	const { x1, y1, x2, y2, arr } = arg;
-	const canvasWidth = arr[0]?.length - 3,
-		canvasHeigth = arr?.length - 3,
-		lineWidth = Math.abs(x2 - x1),
-		lineHeight = Math.abs(y2 - y1);
+	const canvasWidth = arr[0]?.length - 1,
+		canvasHeigth = arr?.length - 1;
+	// lineWidth = Math.abs(x2 - x1),
+	// lineHeight = Math.abs(y2 - y1);
 
 	return (
 		x1 > 0 &&
@@ -41,8 +41,12 @@ const _validate = (arg) => {
 		y2 > 0 &&
 		((x1 === x2 && y1 !== y2) || (x1 !== x2 && y1 === y2)) &&
 		arr.length &&
-		lineWidth <= canvasWidth &&
-		lineHeight <= canvasHeigth
+		x1 < canvasWidth &&
+		y1 < canvasHeigth &&
+		x2 < canvasWidth &&
+		y2 < canvasHeigth
+		// lineWidth <= canvasWidth &&
+		// lineHeight <= canvasHeigth
 	);
 };
 

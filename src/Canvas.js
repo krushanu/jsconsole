@@ -5,23 +5,27 @@ const checkCanvas = (drawingArray) => {
 const constructCanvas = (arg) => {
 	const { w, h } = arg,
 		arr = [];
-	const width = parseInt(w),
-		height = parseInt(h);
+	if (w && h) {
+		const width = parseInt(w),
+			height = parseInt(h);
 
-	for (let i = 0; i <= height + 1; i++) {
-		let subarr = [];
-		for (let j = 0; j <= width + 1; j++) {
-			if (i === 0 || i === height + 1) {
-				subarr.push('-');
-			} else if (j === 0 || j === width + 1) {
-				subarr.push('|');
-			} else {
-				subarr.push('0');
+		for (let i = 0; i <= height + 1; i++) {
+			let subarr = [];
+			for (let j = 0; j <= width + 1; j++) {
+				if (i === 0 || i === height + 1) {
+					subarr.push('-');
+				} else if (j === 0 || j === width + 1) {
+					subarr.push('|');
+				} else {
+					subarr.push('0');
+				}
 			}
+			arr.push(subarr);
 		}
-		arr.push(subarr);
+		return arr;
+	} else {
+		return 'Width and height not defined';
 	}
-	return arr;
 };
 
 export { checkCanvas, constructCanvas };
