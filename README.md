@@ -2,69 +2,95 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Steps
 
-In the project directory, you can run:
+To run the progam, unzip and follow the following steps:
+
+### `npm i`
+Installs all the packages needed to run the script
 
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## Note:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Following points are to be noted while covering the cases.
 
-### `npm run build`
+1) (x, y) = (0, 0) is not allowed to enter or border values
+2) B command can over write on an existing symbol
+3) B command can not re-write on the same symbol
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# The Problem
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Description
 
-### `npm run eject`
+You're given the task of writing a simple console version of a drawing program. 
+At this time, the functionality of the program is quite limited but this might change in the future. 
+In a nutshell, the program should work as follows:
+ 1. Create a new canvas
+ 2. Start drawing on the canvas by issuing various commands
+ 3. Quit
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Command 		Description
+C w h           Should create a new canvas of width w and height h.
+L x1 y1 x2 y2   Should create a new line from (x1,y1) to (x2,y2). Currently only
+                horizontal or vertical lines are supported. Horizontal and vertical lines
+                will be drawn using the 'x' character.
+R x1 y1 x2 y2   Should create a new rectangle, whose upper left corner is (x1,y1) and
+                lower right corner is (x2,y2). Horizontal and vertical lines will be drawn
+                using the 'x' character.
+B x y c         Should fill the entire area connected to (x,y) with "colour" c. The
+                behavior of this is the same as that of the "bucket fill" tool in paint
+                programs.
+Q               Should quit the program.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Sample I/O
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Below is a sample run of the program. User input is prefixed with enter command:
 
-## Learn More
+enter command: C 20 4
+----------------------
+|                    |
+|                    |
+|                    |
+|                    |
+----------------------
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+enter command: L 1 2 6 2
+----------------------
+|                    |
+|xxxxxx              |
+|                    |
+|                    |
+----------------------
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+enter command: L 6 3 6 4
+----------------------
+|                    |
+|xxxxxx              |
+|     x              |
+|     x              |
+----------------------
 
-### Code Splitting
+enter command: R 14 1 18 3
+----------------------
+|             xxxxx  |
+|xxxxxx       x   x  |
+|     x       xxxxx  |
+|     x              |
+----------------------
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+enter command: B 10 3 o
+----------------------
+|oooooooooooooxxxxxoo|
+|xxxxxxooooooox   xoo|
+|     xoooooooxxxxxoo|
+|     xoooooooooooooo|
+----------------------
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+enter command: Q
